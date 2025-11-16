@@ -30,6 +30,7 @@
 #include <inttypes.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <math.h>
 
 #define FATAL(msg)                                        \
   do {                                                    \
@@ -127,97 +128,6 @@
   }                                                          \
  } while (0)
 
-#define ASSERT_EQ_INT(a, b) ASSERT_BASE(a, ==, b, int, "d")
-#define ASSERT_GE_INT(a, b) ASSERT_BASE(a, >=, b, int, "d")
-#define ASSERT_GT_INT(a, b) ASSERT_BASE(a, >, b, int, "d")
-#define ASSERT_LE_INT(a, b) ASSERT_BASE(a, <=, b, int, "d")
-#define ASSERT_LT_INT(a, b) ASSERT_BASE(a, <, b, int, "d")
-#define ASSERT_NE_INT(a, b) ASSERT_BASE(a, !=, b, int, "d")
-
-#define ASSERT_EQ_UINT(a, b) ASSERT_BASE(a, ==, b, unsigned int, "u")
-#define ASSERT_GE_UINT(a, b) ASSERT_BASE(a, >=, b, unsigned int, "u")
-#define ASSERT_GT_UINT(a, b) ASSERT_BASE(a, >, b, unsigned int, "u")
-#define ASSERT_LE_UINT(a, b) ASSERT_BASE(a, <=, b, unsigned int, "u")
-#define ASSERT_LT_UINT(a, b) ASSERT_BASE(a, <, b, unsigned int, "u")
-#define ASSERT_NE_UINT(a, b) ASSERT_BASE(a, !=, b, unsigned int, "u")
-
-#define ASSERT_EQ_INT64(a, b) ASSERT_BASE(a, ==, b, int64_t, PRId64)
-#define ASSERT_GE_INT64(a, b) ASSERT_BASE(a, >=, b, int64_t, PRId64)
-#define ASSERT_GT_INT64(a, b) ASSERT_BASE(a, >, b, int64_t, PRId64)
-#define ASSERT_LE_INT64(a, b) ASSERT_BASE(a, <=, b, int64_t, PRId64)
-#define ASSERT_LT_INT64(a, b) ASSERT_BASE(a, <, b, int64_t, PRId64)
-#define ASSERT_NE_INT64(a, b) ASSERT_BASE(a, !=, b, int64_t, PRId64)
-
-#define ASSERT_EQ_UINT64(a, b) ASSERT_BASE(a, ==, b, uint64_t, PRIu64)
-#define ASSERT_GE_UINT64(a, b) ASSERT_BASE(a, >=, b, uint64_t, PRIu64)
-#define ASSERT_GT_UINT64(a, b) ASSERT_BASE(a, >, b, uint64_t, PRIu64)
-#define ASSERT_LE_UINT64(a, b) ASSERT_BASE(a, <=, b, uint64_t, PRIu64)
-#define ASSERT_LT_UINT64(a, b) ASSERT_BASE(a, <, b, uint64_t, PRIu64)
-#define ASSERT_NE_UINT64(a, b) ASSERT_BASE(a, !=, b, uint64_t, PRIu64)
-
-#define ASSERT_EQ_INT32(a, b) ASSERT_BASE(a, ==, b, int32_t, PRId32)
-#define ASSERT_GE_INT32(a, b) ASSERT_BASE(a, >=, b, int32_t, PRId32)
-#define ASSERT_GT_INT32(a, b) ASSERT_BASE(a, >, b, int32_t, PRId32)
-#define ASSERT_LE_INT32(a, b) ASSERT_BASE(a, <=, b, int32_t, PRId32)
-#define ASSERT_LT_INT32(a, b) ASSERT_BASE(a, <, b, int32_t, PRId32)
-#define ASSERT_NE_INT32(a, b) ASSERT_BASE(a, !=, b, int32_t, PRId32)
-
-#define ASSERT_EQ_UINT32(a, b) ASSERT_BASE(a, ==, b, uint32_t, PRIu32)
-#define ASSERT_GE_UINT32(a, b) ASSERT_BASE(a, >=, b, uint32_t, PRIu32)
-#define ASSERT_GT_UINT32(a, b) ASSERT_BASE(a, >, b, uint32_t, PRIu32)
-#define ASSERT_LE_UINT32(a, b) ASSERT_BASE(a, <=, b, uint32_t, PRIu32)
-#define ASSERT_LT_UINT32(a, b) ASSERT_BASE(a, <, b, uint32_t, PRIu32)
-#define ASSERT_NE_UINT32(a, b) ASSERT_BASE(a, !=, b, uint32_t, PRIu32)
-
-#define ASSERT_EQ_INT16(a, b) ASSERT_BASE(a, ==, b, int16_t, PRId16)
-#define ASSERT_GE_INT16(a, b) ASSERT_BASE(a, >=, b, int16_t, PRId16)
-#define ASSERT_GT_INT16(a, b) ASSERT_BASE(a, >, b, int16_t, PRId16)
-#define ASSERT_LE_INT16(a, b) ASSERT_BASE(a, <=, b, int16_t, PRId16)
-#define ASSERT_LT_INT16(a, b) ASSERT_BASE(a, <, b, int16_t, PRId16)
-#define ASSERT_NE_INT16(a, b) ASSERT_BASE(a, !=, b, int16_t, PRId16)
-
-#define ASSERT_EQ_UINT16(a, b) ASSERT_BASE(a, ==, b, uint16_t, PRIu16)
-#define ASSERT_GE_UINT16(a, b) ASSERT_BASE(a, >=, b, uint16_t, PRIu16)
-#define ASSERT_GT_UINT16(a, b) ASSERT_BASE(a, >, b, uint16_t, PRIu16)
-#define ASSERT_LE_UINT16(a, b) ASSERT_BASE(a, <=, b, uint16_t, PRIu16)
-#define ASSERT_LT_UINT16(a, b) ASSERT_BASE(a, <, b, uint16_t, PRIu16)
-#define ASSERT_NE_UINT16(a, b) ASSERT_BASE(a, !=, b, uint16_t, PRIu16)
-
-#define ASSERT_EQ_INT8(a, b) ASSERT_BASE(a, ==, b, int8_t, PRId8)
-#define ASSERT_GE_INT8(a, b) ASSERT_BASE(a, >=, b, int8_t, PRId8)
-#define ASSERT_GT_INT8(a, b) ASSERT_BASE(a, >, b, int8_t, PRId8)
-#define ASSERT_LE_INT8(a, b) ASSERT_BASE(a, <=, b, int8_t, PRId8)
-#define ASSERT_LT_INT8(a, b) ASSERT_BASE(a, <, b, int8_t, PRId8)
-#define ASSERT_NE_INT8(a, b) ASSERT_BASE(a, !=, b, int8_t, PRId8)
-
-#define ASSERT_EQ_UINT8(a, b) ASSERT_BASE(a, ==, b, uint8_t, PRIu8)
-#define ASSERT_GE_UINT8(a, b) ASSERT_BASE(a, >=, b, uint8_t, PRIu8)
-#define ASSERT_GT_UINT8(a, b) ASSERT_BASE(a, >, b, uint8_t, PRIu8)
-#define ASSERT_LE_UINT8(a, b) ASSERT_BASE(a, <=, b, uint8_t, PRIu8)
-#define ASSERT_LT_UINT8(a, b) ASSERT_BASE(a, <, b, uint8_t, PRIu8)
-#define ASSERT_NE_UINT8(a, b) ASSERT_BASE(a, !=, b, uint8_t, PRIu8)
-
-#define ASSERT_EQ_FLOAT(a, b) ASSERT_BASE(a, ==, b, float, "f")
-#define ASSERT_GE_FLOAT(a, b) ASSERT_BASE(a, >=, b, float, "f")
-#define ASSERT_GT_FLOAT(a, b) ASSERT_BASE(a, >, b, float, "f")
-#define ASSERT_LE_FLOAT(a, b) ASSERT_BASE(a, <=, b, float, "f")
-#define ASSERT_LT_FLOAT(a, b) ASSERT_BASE(a, <, b, float, "f")
-#define ASSERT_NE_FLOAT(a, b) ASSERT_BASE(a, !=, b, float, "f")
-
-#define ASSERT_EQ_DOUBLE(a, b) ASSERT_BASE(a, ==, b, double, "lf")
-#define ASSERT_GE_DOUBLE(a, b) ASSERT_BASE(a, >=, b, double, "lf")
-#define ASSERT_GT_DOUBLE(a, b) ASSERT_BASE(a, >, b, double, "lf")
-#define ASSERT_LE_DOUBLE(a, b) ASSERT_BASE(a, <=, b, double, "lf")
-#define ASSERT_LT_DOUBLE(a, b) ASSERT_BASE(a, <, b, double, "lf")
-#define ASSERT_NE_DOUBLE(a, b) ASSERT_BASE(a, !=, b, double, "lf")
-
-#define ASSERT_EQ_SIZE(a, b) ASSERT_BASE(a, ==, b, size_t, "zu")
-#define ASSERT_GE_SIZE(a, b) ASSERT_BASE(a, >=, b, size_t, "zu")
-#define ASSERT_GT_SIZE(a, b) ASSERT_BASE(a, >, b, size_t, "zu")
-#define ASSERT_LE_SIZE(a, b) ASSERT_BASE(a, <=, b, size_t, "zu")
-#define ASSERT_LT_SIZE(a, b) ASSERT_BASE(a, <, b, size_t, "zu")
-#define ASSERT_NE_SIZE(a, b) ASSERT_BASE(a, !=, b, size_t, "zu")
-
 #define ASSERT_TRUE(a) \
   ASSERT_BASE(a, ==, true, bool, "d")
 
@@ -248,9 +158,9 @@
 #define ASSERT_STR_NE_LEN(a, b, len) \
   ASSERT_BASE_LEN(strncmp(a, b, len) != 0, a, !=, b, "s", len)
 
-enum test_status {
+enum TestStatus {
   TEST_OK = 0,
-  TEST_SKIP = 7
+  TEST_SKIP = 1
 };
 
 #define RETURN_OK()                                                           \
@@ -278,5 +188,561 @@ enum test_status {
       printf("FAILED\n");                                                     \
     }                                                                         \
   } while (0)
+
+
+// ==============================================
+// BASIC INTEGER ASSERTIONS
+// ==============================================
+
+#define ASSERT_EQ(a, b) ASSERT_BASE(a, ==, b, int64_t, PRId64)
+#define ASSERT_GE(a, b) ASSERT_BASE(a, >=, b, int64_t, PRId64)
+#define ASSERT_GT(a, b) ASSERT_BASE(a, >, b, int64_t, PRId64)
+#define ASSERT_LE(a, b) ASSERT_BASE(a, <=, b, int64_t, PRId64)
+#define ASSERT_LT(a, b) ASSERT_BASE(a, <, b, int64_t, PRId64)
+#define ASSERT_NE(a, b) ASSERT_BASE(a, !=, b, int64_t, PRId64)
+
+
+// ==============================================
+// TYPE-SAFE INTEGER ASSERTIONS
+// ==============================================
+
+#define TYPE_CHECK(expr, expected_type) \
+  ((void)sizeof(struct { int:-!(sizeof(*(1?(expected_type*)0:(typeof(expr)*)0)) == sizeof(expected_type)); }))
+
+// ==============================================
+// INT8_T ASSERTIONS
+// ==============================================
+
+#define ASSERT_EQ_INT8(a, b) \
+do { \
+    TYPE_CHECK(a, int8_t); \
+    TYPE_CHECK(b, int8_t); \
+    ASSERT_BASE(a, ==, b, int8_t, PRId8); \
+} while(0)
+
+#define ASSERT_GE_INT8(a, b) \
+do { \
+    TYPE_CHECK(a, int8_t); \
+    TYPE_CHECK(b, int8_t); \
+    ASSERT_BASE(a, >=, b, int8_t, PRId8); \
+} while(0)
+
+#define ASSERT_GT_INT8(a, b) \
+do { \
+    TYPE_CHECK(a, int8_t); \
+    TYPE_CHECK(b, int8_t); \
+    ASSERT_BASE(a, >, b, int8_t, PRId8); \
+} while(0)
+
+#define ASSERT_LE_INT8(a, b) \
+do { \
+    TYPE_CHECK(a, int8_t); \
+    TYPE_CHECK(b, int8_t); \
+    ASSERT_BASE(a, <=, b, int8_t, PRId8); \
+} while(0)
+
+#define ASSERT_LT_INT8(a, b) \
+do { \
+    TYPE_CHECK(a, int8_t); \
+    TYPE_CHECK(b, int8_t); \
+    ASSERT_BASE(a, <, b, int8_t, PRId8); \
+} while(0)
+
+#define ASSERT_NE_INT8(a, b) \
+do { \
+    TYPE_CHECK(a, int8_t); \
+    TYPE_CHECK(b, int8_t); \
+    ASSERT_BASE(a, !=, b, int8_t, PRId8); \
+} while(0)
+
+
+// ==============================================
+// UINT8_T ASSERTIONS
+// ==============================================
+
+#define ASSERT_EQ_UINT8(a, b) \
+do { \
+    TYPE_CHECK(a, uint8_t); \
+    TYPE_CHECK(b, uint8_t); \
+    ASSERT_BASE(a, ==, b, uint8_t, PRIu8); \
+} while(0)
+
+#define ASSERT_GE_UINT8(a, b) \
+do { \
+    TYPE_CHECK(a, uint8_t); \
+    TYPE_CHECK(b, uint8_t); \
+    ASSERT_BASE(a, >=, b, uint8_t, PRIu8); \
+} while(0)
+
+#define ASSERT_GT_UINT8(a, b) \
+do { \
+    TYPE_CHECK(a, uint8_t); \
+    TYPE_CHECK(b, uint8_t); \
+    ASSERT_BASE(a, >, b, uint8_t, PRIu8); \
+} while(0)
+
+#define ASSERT_LE_UINT8(a, b) \
+do { \
+    TYPE_CHECK(a, uint8_t); \
+    TYPE_CHECK(b, uint8_t); \
+    ASSERT_BASE(a, <=, b, uint8_t, PRIu8); \
+} while(0)
+
+#define ASSERT_LT_UINT8(a, b) \
+do { \
+    TYPE_CHECK(a, uint8_t); \
+    TYPE_CHECK(b, uint8_t); \
+    ASSERT_BASE(a, <, b, uint8_t, PRIu8); \
+} while(0)
+
+#define ASSERT_NE_UINT8(a, b) \
+do { \
+    TYPE_CHECK(a, uint8_t); \
+    TYPE_CHECK(b, uint8_t); \
+    ASSERT_BASE(a, !=, b, uint8_t, PRIu8); \
+} while(0)
+
+
+// ==============================================
+// INT16_T ASSERTIONS
+// ==============================================
+
+#define ASSERT_EQ_INT16(a, b) \
+do { \
+    TYPE_CHECK(a, int16_t); \
+    TYPE_CHECK(b, int16_t); \
+    ASSERT_BASE(a, ==, b, int16_t, PRId16); \
+} while(0)
+
+#define ASSERT_GE_INT16(a, b) \
+do { \
+    TYPE_CHECK(a, int16_t); \
+    TYPE_CHECK(b, int16_t); \
+    ASSERT_BASE(a, >=, b, int16_t, PRId16); \
+} while(0)
+
+#define ASSERT_GT_INT16(a, b) \
+do { \
+    TYPE_CHECK(a, int16_t); \
+    TYPE_CHECK(b, int16_t); \
+    ASSERT_BASE(a, >, b, int16_t, PRId16); \
+} while(0)
+
+#define ASSERT_LE_INT16(a, b) \
+do { \
+    TYPE_CHECK(a, int16_t); \
+    TYPE_CHECK(b, int16_t); \
+    ASSERT_BASE(a, <=, b, int16_t, PRId16); \
+} while(0)
+
+#define ASSERT_LT_INT16(a, b) \
+do { \
+    TYPE_CHECK(a, int16_t); \
+    TYPE_CHECK(b, int16_t); \
+    ASSERT_BASE(a, <, b, int16_t, PRId16); \
+} while(0)
+
+#define ASSERT_NE_INT16(a, b) \
+do { \
+    TYPE_CHECK(a, int16_t); \
+    TYPE_CHECK(b, int16_t); \
+    ASSERT_BASE(a, !=, b, int16_t, PRId16); \
+} while(0)
+
+
+// ==============================================
+// UINT16_T ASSERTIONS
+// ==============================================
+
+#define ASSERT_EQ_UINT16(a, b) \
+do { \
+    TYPE_CHECK(a, uint16_t); \
+    TYPE_CHECK(b, uint16_t); \
+    ASSERT_BASE(a, ==, b, uint16_t, PRIu16); \
+} while(0)
+
+#define ASSERT_GE_UINT16(a, b) \
+do { \
+    TYPE_CHECK(a, uint16_t); \
+    TYPE_CHECK(b, uint16_t); \
+    ASSERT_BASE(a, >=, b, uint16_t, PRIu16); \
+} while(0)
+
+#define ASSERT_GT_UINT16(a, b) \
+do { \
+    TYPE_CHECK(a, uint16_t); \
+    TYPE_CHECK(b, uint16_t); \
+    ASSERT_BASE(a, >, b, uint16_t, PRIu16); \
+} while(0)
+
+#define ASSERT_LE_UINT16(a, b) \
+do { \
+    TYPE_CHECK(a, uint16_t); \
+    TYPE_CHECK(b, uint16_t); \
+    ASSERT_BASE(a, <=, b, uint16_t, PRIu16); \
+} while(0)
+
+#define ASSERT_LT_UINT16(a, b) \
+do { \
+    TYPE_CHECK(a, uint16_t); \
+    TYPE_CHECK(b, uint16_t); \
+    ASSERT_BASE(a, <, b, uint16_t, PRIu16); \
+} while(0)
+
+#define ASSERT_NE_UINT16(a, b) \
+do { \
+    TYPE_CHECK(a, uint16_t); \
+    TYPE_CHECK(b, uint16_t); \
+    ASSERT_BASE(a, !=, b, uint16_t, PRIu16); \
+} while(0)
+
+
+// ==============================================
+// INT32_T ASSERTIONS
+// ==============================================
+
+#define ASSERT_EQ_INT32(a, b) \
+do { \
+    TYPE_CHECK(a, int32_t); \
+    TYPE_CHECK(b, int32_t); \
+    ASSERT_BASE(a, ==, b, int32_t, PRId32); \
+} while(0)
+
+#define ASSERT_GE_INT32(a, b) \
+do { \
+    TYPE_CHECK(a, int32_t); \
+    TYPE_CHECK(b, int32_t); \
+    ASSERT_BASE(a, >=, b, int32_t, PRId32); \
+} while(0)
+
+#define ASSERT_GT_INT32(a, b) \
+do { \
+    TYPE_CHECK(a, int32_t); \
+    TYPE_CHECK(b, int32_t); \
+    ASSERT_BASE(a, >, b, int32_t, PRId32); \
+} while(0)
+
+#define ASSERT_LE_INT32(a, b) \
+do { \
+    TYPE_CHECK(a, int32_t); \
+    TYPE_CHECK(b, int32_t); \
+    ASSERT_BASE(a, <=, b, int32_t, PRId32); \
+} while(0)
+
+#define ASSERT_LT_INT32(a, b) \
+do { \
+    TYPE_CHECK(a, int32_t); \
+    TYPE_CHECK(b, int32_t); \
+    ASSERT_BASE(a, <, b, int32_t, PRId32); \
+} while(0)
+
+#define ASSERT_NE_INT32(a, b) \
+do { \
+    TYPE_CHECK(a, int32_t); \
+    TYPE_CHECK(b, int32_t); \
+    ASSERT_BASE(a, !=, b, int32_t, PRId32); \
+} while(0)
+
+
+// ==============================================
+// UINT32_T ASSERTIONS
+// ==============================================
+
+#define ASSERT_EQ_UINT32(a, b) \
+do { \
+    TYPE_CHECK(a, uint32_t); \
+    TYPE_CHECK(b, uint32_t); \
+    ASSERT_BASE(a, ==, b, uint32_t, PRIu32); \
+} while(0)
+
+#define ASSERT_GE_UINT32(a, b) \
+do { \
+    TYPE_CHECK(a, uint32_t); \
+    TYPE_CHECK(b, uint32_t); \
+    ASSERT_BASE(a, >=, b, uint32_t, PRIu32); \
+} while(0)
+
+#define ASSERT_GT_UINT32(a, b) \
+do { \
+    TYPE_CHECK(a, uint32_t); \
+    TYPE_CHECK(b, uint32_t); \
+    ASSERT_BASE(a, >, b, uint32_t, PRIu32); \
+} while(0)
+
+#define ASSERT_LE_UINT32(a, b) \
+do { \
+    TYPE_CHECK(a, uint32_t); \
+    TYPE_CHECK(b, uint32_t); \
+    ASSERT_BASE(a, <=, b, uint32_t, PRIu32); \
+} while(0)
+
+#define ASSERT_LT_UINT32(a, b) \
+do { \
+    TYPE_CHECK(a, uint32_t); \
+    TYPE_CHECK(b, uint32_t); \
+    ASSERT_BASE(a, <, b, uint32_t, PRIu32); \
+} while(0)
+
+#define ASSERT_NE_UINT32(a, b) \
+do { \
+    TYPE_CHECK(a, uint32_t); \
+    TYPE_CHECK(b, uint32_t); \
+    ASSERT_BASE(a, !=, b, uint32_t, PRIu32); \
+} while(0)
+
+
+// ==============================================
+// INT64_T ASSERTIONS
+// ==============================================
+
+#define ASSERT_EQ_INT64(a, b) \
+do { \
+    TYPE_CHECK(a, int64_t); \
+    TYPE_CHECK(b, int64_t); \
+    ASSERT_BASE(a, ==, b, int64_t, PRId64); \
+} while(0)
+
+#define ASSERT_GE_INT64(a, b) \
+do { \
+    TYPE_CHECK(a, int64_t); \
+    TYPE_CHECK(b, int64_t); \
+    ASSERT_BASE(a, >=, b, int64_t, PRId64); \
+} while(0)
+
+#define ASSERT_GT_INT64(a, b) \
+do { \
+    TYPE_CHECK(a, int64_t); \
+    TYPE_CHECK(b, int64_t); \
+    ASSERT_BASE(a, >, b, int64_t, PRId64); \
+} while(0)
+
+#define ASSERT_LE_INT64(a, b) \
+do { \
+    TYPE_CHECK(a, int64_t); \
+    TYPE_CHECK(b, int64_t); \
+    ASSERT_BASE(a, <=, b, int64_t, PRId64); \
+} while(0)
+
+#define ASSERT_LT_INT64(a, b) \
+do { \
+    TYPE_CHECK(a, int64_t); \
+    TYPE_CHECK(b, int64_t); \
+    ASSERT_BASE(a, <, b, int64_t, PRId64); \
+} while(0)
+
+#define ASSERT_NE_INT64(a, b) \
+do { \
+    TYPE_CHECK(a, int64_t); \
+    TYPE_CHECK(b, int64_t); \
+    ASSERT_BASE(a, !=, b, int64_t, PRId64); \
+} while(0)
+
+
+// ==============================================
+// UINT64_T ASSERTIONS
+// ==============================================
+
+#define ASSERT_EQ_UINT64(a, b) \
+do { \
+    TYPE_CHECK(a, uint64_t); \
+    TYPE_CHECK(b, uint64_t); \
+    ASSERT_BASE(a, ==, b, uint64_t, PRIu64); \
+} while(0)
+
+#define ASSERT_GE_UINT64(a, b) \
+do { \
+    TYPE_CHECK(a, uint64_t); \
+    TYPE_CHECK(b, uint64_t); \
+    ASSERT_BASE(a, >=, b, uint64_t, PRIu64); \
+} while(0)
+
+#define ASSERT_GT_UINT64(a, b) \
+do { \
+    TYPE_CHECK(a, uint64_t); \
+    TYPE_CHECK(b, uint64_t); \
+    ASSERT_BASE(a, >, b, uint64_t, PRIu64); \
+} while(0)
+
+#define ASSERT_LE_UINT64(a, b) \
+do { \
+    TYPE_CHECK(a, uint64_t); \
+    TYPE_CHECK(b, uint64_t); \
+    ASSERT_BASE(a, <=, b, uint64_t, PRIu64); \
+} while(0)
+
+#define ASSERT_LT_UINT64(a, b) \
+do { \
+    TYPE_CHECK(a, uint64_t); \
+    TYPE_CHECK(b, uint64_t); \
+    ASSERT_BASE(a, <, b, uint64_t, PRIu64); \
+} while(0)
+
+#define ASSERT_NE_UINT64(a, b) \
+do { \
+    TYPE_CHECK(a, uint64_t); \
+    TYPE_CHECK(b, uint64_t); \
+    ASSERT_BASE(a, !=, b, uint64_t, PRIu64); \
+} while(0)
+
+
+// ==============================================
+// SIZE_T ASSERTIONS
+// ==============================================
+
+#define ASSERT_EQ_SIZE(a, b) \
+do { \
+    TYPE_CHECK(a, size_t); \
+    TYPE_CHECK(b, size_t); \
+    ASSERT_BASE(a, ==, b, size_t, "zu"); \
+} while(0)
+
+#define ASSERT_GE_SIZE(a, b) \
+do { \
+    TYPE_CHECK(a, size_t); \
+    TYPE_CHECK(b, size_t); \
+    ASSERT_BASE(a, >=, b, size_t, "zu"); \
+} while(0)
+
+#define ASSERT_GT_SIZE(a, b) \
+do { \
+    TYPE_CHECK(a, size_t); \
+    TYPE_CHECK(b, size_t); \
+    ASSERT_BASE(a, >, b, size_t, "zu"); \
+} while(0)
+
+#define ASSERT_LE_SIZE(a, b) \
+do { \
+    TYPE_CHECK(a, size_t); \
+    TYPE_CHECK(b, size_t); \
+    ASSERT_BASE(a, <=, b, size_t, "zu"); \
+} while(0)
+
+#define ASSERT_LT_SIZE(a, b) \
+do { \
+    TYPE_CHECK(a, size_t); \
+    TYPE_CHECK(b, size_t); \
+    ASSERT_BASE(a, <, b, size_t, "zu"); \
+} while(0)
+
+#define ASSERT_NE_SIZE(a, b) \
+do { \
+    TYPE_CHECK(a, size_t); \
+    TYPE_CHECK(b, size_t); \
+    ASSERT_BASE(a, !=, b, size_t, "zu"); \
+} while(0)
+
+
+// ==============================================
+// CHAR ASSERTIONS
+// ==============================================
+
+#define ASSERT_EQ_CHAR(a, b) \
+do { \
+    TYPE_CHECK(a, char); \
+    TYPE_CHECK(b, char); \
+    ASSERT_BASE(a, ==, b, char, "c"); \
+} while(0)
+
+#define ASSERT_NE_CHAR(a, b) \
+do { \
+    TYPE_CHECK(a, char); \
+    TYPE_CHECK(b, char); \
+    ASSERT_BASE(a, !=, b, char, "c"); \
+} while(0)
+
+#define ASSERT_EQ_UCHAR(a, b) \
+do { \
+    TYPE_CHECK(a, unsigned char); \
+    TYPE_CHECK(b, unsigned char); \
+    ASSERT_BASE(a, ==, b, unsigned char, "u"); \
+} while(0)
+
+#define ASSERT_NE_UCHAR(a, b) \
+do { \
+    TYPE_CHECK(a, unsigned char); \
+    TYPE_CHECK(b, unsigned char); \
+    ASSERT_BASE(a, !=, b, unsigned char, "u"); \
+} while(0)
+
+
+// ==============================================
+// FLOAT ASSERTIONS (with epsilon)
+// ==============================================
+
+#define ASSERT_FLOAT_EQ(a, b, epsilon) \
+do { \
+    TYPE_CHECK(a, float); \
+    TYPE_CHECK(b, float); \
+    TYPE_CHECK(epsilon, float); \
+    float const eval_a = (a); \
+    float const eval_b = (b); \
+    float const eval_eps = (epsilon); \
+    if (!(fabsf(eval_a - eval_b) <= eval_eps)) { \
+        fprintf(stderr, \
+                "Assertion failed in %s on line %d: `%s == %s` " \
+                "(%f == %f, diff: %f > %f)\n", \
+                __FILE__, __LINE__, #a, #b, eval_a, eval_b, \
+                fabsf(eval_a - eval_b), eval_eps); \
+        abort(); \
+    } \
+} while(0)
+
+#define ASSERT_FLOAT_NE(a, b, epsilon) \
+do { \
+    TYPE_CHECK(a, float); \
+    TYPE_CHECK(b, float); \
+    TYPE_CHECK(epsilon, float); \
+    float const eval_a = (a); \
+    float const eval_b = (b); \
+    float const eval_eps = (epsilon); \
+    if (!(fabsf(eval_a - eval_b) > eval_eps)) { \
+        fprintf(stderr, \
+                "Assertion failed in %s on line %d: `%s != %s` " \
+                "(%f != %f, diff: %f <= %f)\n", \
+                __FILE__, __LINE__, #a, #b, eval_a, eval_b, \
+                fabsf(eval_a - eval_b), eval_eps); \
+        abort(); \
+    } \
+} while(0)
+
+// ==============================================
+// DOUBLE ASSERTIONS (with epsilon)
+// ==============================================
+
+#define ASSERT_DOUBLE_EQ(a, b, epsilon) \
+do { \
+    TYPE_CHECK(a, double); \
+    TYPE_CHECK(b, double); \
+    TYPE_CHECK(epsilon, double); \
+    double const eval_a = (a); \
+    double const eval_b = (b); \
+    double const eval_eps = (epsilon); \
+    if (!(fabs(eval_a - eval_b) <= eval_eps)) { \
+        fprintf(stderr, \
+                "Assertion failed in %s on line %d: `%s == %s` " \
+                "(%f == %f, diff: %f > %f)\n", \
+                __FILE__, __LINE__, #a, #b, eval_a, eval_b, \
+                fabs(eval_a - eval_b), eval_eps); \
+        abort(); \
+    } \
+} while(0)
+
+#define ASSERT_DOUBLE_NE(a, b, epsilon) \
+do { \
+    TYPE_CHECK(a, double); \
+    TYPE_CHECK(b, double); \
+    TYPE_CHECK(epsilon, double); \
+    double const eval_a = (a); \
+    double const eval_b = (b); \
+    double const eval_eps = (epsilon); \
+    if (!(fabs(eval_a - eval_b) > eval_eps)) { \
+        fprintf(stderr, \
+                "Assertion failed in %s on line %d: `%s != %s` " \
+                "(%f != %f, diff: %f <= %f)\n", \
+                __FILE__, __LINE__, #a, #b, eval_a, eval_b, \
+                fabs(eval_a - eval_b), eval_eps); \
+        abort(); \
+    } \
+} while(0)
 
 #endif
