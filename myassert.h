@@ -128,36 +128,6 @@
   }                                                          \
  } while (0)
 
-#define ASSERT_TRUE(a) \
-  ASSERT_BASE(a, ==, true, bool, "d")
-
-#define ASSERT_FALSE(a) \
-  ASSERT_BASE(a, ==, false, bool, "d")
-
-#define ASSERT_NULL(a) \
-  ASSERT_BASE(a, ==, NULL, const void*, "p")
-
-#define ASSERT_NOT_NULL(a) \
-  ASSERT_BASE(a, !=, NULL, const void*, "p")
-
-#define ASSERT_MEM_EQ(a, b, len) \
-  ASSERT_BASE_LEN(memcmp(a, b, len) == 0, a, ==, b, "p", len)
-
-#define ASSERT_MEM_NE(a, b, len) \
-  ASSERT_BASE_LEN(memcmp(a, b, len) != 0, a, !=, b, "p", len)
-
-#define ASSERT_STR_EQ(a, b) \
-  ASSERT_BASE_STR(strcmp(a, b) == 0, a, == , b, char*, "s")
-
-#define ASSERT_STR_NE(a, b) \
-  ASSERT_BASE_STR(strcmp(a, b) != 0, a, !=, b, char*, "s")
-
-#define ASSERT_STR_EQ_LEN(a, b, len) \
-  ASSERT_BASE_LEN(strncmp(a, b, len) == 0, a, ==, b, "s", len)
-
-#define ASSERT_STR_NE_LEN(a, b, len) \
-  ASSERT_BASE_LEN(strncmp(a, b, len) != 0, a, !=, b, "s", len)
-
 enum TestStatus {
   TEST_OK = 0,
   TEST_SKIP = 1
@@ -188,6 +158,56 @@ enum TestStatus {
       printf("FAILED\n");                                                     \
     }                                                                         \
   } while (0)
+
+
+// =============================================================
+// BOOLEAN ASSERTIONS
+// =============================================================
+
+#define ASSERT_TRUE(a) \
+  ASSERT_BASE(a, ==, true, bool, "d")
+
+#define ASSERT_FALSE(a) \
+  ASSERT_BASE(a, ==, false, bool, "d")
+
+
+// =============================================================
+// NULL ASSERTIONS
+// =============================================================
+
+#define ASSERT_NULL(a) \
+  ASSERT_BASE(a, ==, NULL, const void*, "p")
+
+#define ASSERT_NOT_NULL(a) \
+  ASSERT_BASE(a, !=, NULL, const void*, "p")
+
+
+// =============================================================
+// MEMORY ASSERTIONS
+// =============================================================
+
+#define ASSERT_EQ_MEM(a, b, len) \
+  ASSERT_BASE_LEN(memcmp(a, b, len) == 0, a, ==, b, "p", len)
+
+#define ASSERT_NE_MEM(a, b, len) \
+  ASSERT_BASE_LEN(memcmp(a, b, len) != 0, a, !=, b, "p", len)
+
+
+// =============================================================
+// STRING ASSERTIONS
+// =============================================================
+
+#define ASSERT_EQ_STR(a, b) \
+  ASSERT_BASE_STR(strcmp(a, b) == 0, a, == , b, char*, "s")
+
+#define ASSERT_NE_STR(a, b) \
+  ASSERT_BASE_STR(strcmp(a, b) != 0, a, !=, b, char*, "s")
+
+#define ASSERT_EQ_STR_LEN(a, b, len) \
+  ASSERT_BASE_LEN(strncmp(a, b, len) == 0, a, ==, b, "s", len)
+
+#define ASSERT_NE_STR_LEN(a, b, len) \
+  ASSERT_BASE_LEN(strncmp(a, b, len) != 0, a, !=, b, "s", len)
 
 
 // ==============================================
@@ -669,7 +689,7 @@ do { \
 // FLOAT ASSERTIONS (with epsilon)
 // ==============================================
 
-#define ASSERT_FLOAT_EQ(a, b, epsilon) \
+#define ASSERT_EQ_FLOAT(a, b, epsilon) \
 do { \
     TYPE_CHECK(a, float); \
     TYPE_CHECK(b, float); \
@@ -687,7 +707,7 @@ do { \
     } \
 } while(0)
 
-#define ASSERT_FLOAT_NE(a, b, epsilon) \
+#define ASSERT_NE_FLOAT(a, b, epsilon) \
 do { \
     TYPE_CHECK(a, float); \
     TYPE_CHECK(b, float); \
@@ -705,11 +725,12 @@ do { \
     } \
 } while(0)
 
+
 // ==============================================
 // DOUBLE ASSERTIONS (with epsilon)
 // ==============================================
 
-#define ASSERT_DOUBLE_EQ(a, b, epsilon) \
+#define ASSERT_EQ_DOUBLE(a, b, epsilon) \
 do { \
     TYPE_CHECK(a, double); \
     TYPE_CHECK(b, double); \
@@ -727,7 +748,7 @@ do { \
     } \
 } while(0)
 
-#define ASSERT_DOUBLE_NE(a, b, epsilon) \
+#define ASSERT_NE_DOUBLE(a, b, epsilon) \
 do { \
     TYPE_CHECK(a, double); \
     TYPE_CHECK(b, double); \
