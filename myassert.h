@@ -227,7 +227,11 @@ enum TestStatus {
 // ==============================================
 
 #define TYPE_CHECK(expr, expected_type) \
-  ((void)sizeof(struct { int:-!(sizeof(*(1?(expected_type*)0:(typeof(expr)*)0)) == sizeof(expected_type)); }))
+do { \
+    expected_type _type_check_var = expr; \
+    (void)_type_check_var; \
+    (void)sizeof(char[sizeof(expr) == sizeof(expected_type) ? 1 : -1]); \
+} while(0)
 
 // ==============================================
 // INT8_T ASSERTIONS
